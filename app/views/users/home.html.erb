@@ -1,0 +1,16 @@
+<%if @current_user%>
+	<%if @current_user.admin?%>
+		<h1>Bienvenue administrateur <%=@current_user.name %> !</h1>
+	<%else%>
+		<h1>Bienvenue <%=@current_user.name %> !</h1>
+	<%end%>
+	<%=link_to "Se déconnecter", users_logout_path%>
+	<%=link_to "Liste des utilisateurs", users_index_path%>
+<%else%>
+	<h1>Bienvenue visiteur anonyme !</h1>
+	<%=link_to  "S'identifier",users_login_path%>	 
+<%end%>
+
+
+
+
