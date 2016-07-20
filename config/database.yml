@@ -18,4 +18,4 @@ test:
 
 production:
   <<: *default
-  database: my_database_test
+  database: my_database_prod
