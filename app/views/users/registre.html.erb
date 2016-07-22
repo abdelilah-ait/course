@@ -1,0 +1,9 @@
+<h2>Sign up</h2>
+<%=link_to  "Retourner à l'accueil",users_home_path%><br /><br />
+<%=form_tag users_registre_path, method: :post do%>
+	<%=text_field_tag :name, "", placeholder: "name"%><br /><br />
+	<%=password_field_tag :password, "", placeholder: "password"%> <br /><br />
+	<%=password_field_tag :password_confirmation, "", placeholder: "password confirmation"%><br /><br />
+	<%=email_field_tag :email, "" , placeholder: "email@example.com"%><br /><br />
+	<%=submit_tag 'Register'%><br /><br />
+<%end%>

@@ -1,7 +1,7 @@
 <h1>Connexion</h1>
 <%=link_to  "Retourner à l'accueil",users_home_path%>
 <%=form_tag users_login_path, method: :post do%>
-	<%=text_field_tag :name, "", placeholder: "name"%>
+	<%=email_field_tag :email, "", placeholder: "email"%>
 	<%=password_field_tag :password, "", placeholder: "password"%> 
 	<%=submit_tag 'Se connecter'%>
 <%end%>

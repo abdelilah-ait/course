@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'users/home' => 'users#home', as: :users_home
   get 'users/login' => 'users#login', as: :users_login
   get 'users' => 'users#index', as: :users_index
+  get 'users/registre' => 'users#registre', as: :users_registre
+  post 'users/registre' => 'users#create'
   post 'users/login' => 'users#check'
 
 
