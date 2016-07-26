@@ -18,11 +18,27 @@ class UsersController < ApplicationController
   end
 
   def index
-  	if !@current_user.try(:admin?)
-      flash[:error] = "Accès interdit"
-    else
-    	@users= User.all
-    end
+  	# if !@current_user.try(:admin?)
+   #    flash[:error] = "Accès interdit"
+   #  else
+    	@users = User.all
+    # end
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+  end
+
+  def new
+
+      @user = User.new
+      %w(home office mobile).each do |phone|
+        @user.phones.build(phone_type: phone)
+      end
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
   end
 
   def check
@@ -37,9 +53,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    @newuser = User.new name: params[:name],  email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation]
     if params[:password] == params[:password_confirmation]
 
-      @newuser = User.new name: params[:name],  email: params[:email], password: params[:password]
       if @newuser.save
         connect(@newuser)
       else
@@ -51,6 +67,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find_by(id: params[:id])
+
+    if @user.update(user_params)
+      redirect_to users_show_path(@user)
+    else
+      flash[:info] = "your infos does not updated"
+      render "edit"
+    end
+  end
+
+  def delete 
+    user = User.find_by(id: params[:id])
+    user.destroy   
+    redirect_to users_index_path
+  end
+
   private
 
     def connect(user)
@@ -58,4 +91,7 @@ class UsersController < ApplicationController
       flash[:info] = "Vous êtes maintenant connecté"
       redirect_to users_home_path
     end
+    def user_params
+      params.permit(:name, :password, :password_confirmation, :email)
+    end  
 end
