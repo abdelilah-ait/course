@@ -2,9 +2,7 @@
 <%if @users%>
 	<h3>Liste des utilisateurs</h3><br />
 	<%@users.each do |user|%>
-		<%=link_to users_show_path(user.id) do%>
-			<p><%=user.name%></p>
-		<%end%>	
+		<%=link_to user.name, users_show_path(user.id) %><br /><br />
 	<%end%>
 <%else%>
 	<%=flash[:error]%>

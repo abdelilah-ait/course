@@ -4,9 +4,17 @@ class User < ApplicationRecord
   validates :email, uniqueness: :true
   # validates :password, confirmation: :true
   has_secure_password
+  has_many :phones
   validates_confirmation_of :password
+
+  def as_jason(option={})
+  	{name: self.name, email: self.email}
+  end
+  	# def as_json(options={})
+   #      super(only: [:name, :email])
+   #  end
   
-	has_many :phones
+	
 	def admin?
 		self.role == "admin"
 	end

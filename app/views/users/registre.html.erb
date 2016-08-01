@@ -4,6 +4,13 @@
 	<%=text_field_tag :name, "", placeholder: "name"%><br /><br />
 	<%=password_field_tag :password, "", placeholder: "password"%> <br /><br />
 	<%=password_field_tag :password_confirmation, "", placeholder: "password confirmation"%><br /><br />
+	<%=text_field_tag :number1, "", placeholder: "Phone 1"%>
+	<%=select_tag "phone_type1", options_for_select(@phones)%><br /><br />
+	<%=text_field_tag :number2, "", placeholder: "Phone 2"%>
+	<%=select_tag 'phone_type2', options_for_select(@phones)%><br /><br />
+	<%=text_field_tag :number3, "", placeholder: "Phone 3"%>
+	<%=select_tag 'phone_type3', options_for_select(@phones)%><br /><br />
 	<%=email_field_tag :email, "" , placeholder: "email@example.com"%><br /><br />
 	<%=submit_tag 'Register'%><br /><br />
+
 <%end%>

@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 
   def registre
     @newuser = User.new
+    @phones = ["Home", "Mobile", "Office"]
+    @newphone = Phone.new
   end
 
   def logout
@@ -27,6 +29,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @phone = Phone.find_by(id: params[:id])
+    #  # render json: {user_name: @user.name, email: @user.email }
+    #  respond_to do |format|
+    #       format.html # index.html.erb
+    #       format.json {render json:  @user.as_jason}
+    # # # render :nothing => true, :status => 404
+    #   end
   end
 
   def new
@@ -39,6 +48,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
+    @phones = ["Home", "Mobile", "Office"]
   end
 
   def check
@@ -53,28 +63,44 @@ class UsersController < ApplicationController
   end
 
   def create
-    @newuser = User.new name: params[:name],  email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation]
+    @newuser = User.new name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation]
+   
+    newphone1 = Phone.new phone_type: params[:phone_type1], number: params[:number1]
+    newphone2 = Phone.new phone_type: params[:phone_type2], number: params[:number2]
+    newphone3 = Phone.new phone_type: params[:phone_type3], number: params[:number3]
+
+    @newuser.phones = [newphone1, newphone2, newphone3]
+
+    # phones = []
+    # params[:phones].each do |phone|
+    #   phones << Phone.new phone_type: params[:phone_type], number: params[:number]
+    # end
     if params[:password] == params[:password_confirmation]
 
       if @newuser.save
         connect(@newuser)
       else
-        render "registre"
+        redirect_to users_registre_path
       end
     else
       flash[:info] = "password confirmation invalid"
-      render "registre"
+      redirect_to users_registre_path
     end
   end
 
   def update
     @user = User.find_by(id: params[:id])
-
+    
     if @user.update(user_params)
+
+      @user.phones[0].update(phone_type: params[:phone_type1], number: params[:number1]) if params[:number1].present?
+      @user.phones[1].update(phone_type: params[:phone_type2], number: params[:number2]) if params[:number2].present?
+      @user.phones[2].update(phone_type: params[:phone_type3], number: params[:number3]) if params[:number3].present?
+
       redirect_to users_show_path(@user)
     else
       flash[:info] = "your infos does not updated"
-      render "edit"
+      redirect_to users_edit_path
     end
   end
 

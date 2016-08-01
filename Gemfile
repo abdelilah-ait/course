@@ -22,6 +22,9 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'active_model_serializers', '~> 0.9.3'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -37,6 +40,11 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.7', require: false
    gem 'faker', '~> 1.6', '>= 1.6.3', require: false
    gem 'rails-controller-testing', '~> 0.0.3'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'pry-rails', '~> 0.3.4'
+  gem "pry-stack_explorer"
+ gem "pry-byebug"
 end
 
 group :development do
