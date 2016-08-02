@@ -1,10 +1,12 @@
 
 class User < ApplicationRecord
+  
   validates :email, :password, presence: :true
   validates :email, uniqueness: :true
   # validates :password, confirmation: :true
   has_secure_password
-  has_many :phones
+  has_many :phones, dependent: :destroy
+  has_many :orders, dependent: :destroy
   validates_confirmation_of :password
 
   def as_jason(option={})

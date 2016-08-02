@@ -35,6 +35,8 @@ gem 'active_model_serializers', '~> 0.9.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  
+  
   gem 'byebug', platform: :mri
   #gem 'ffaker', '~> 2.0', require: false
   gem 'factory_girl_rails', '~> 4.7', require: false
@@ -45,6 +47,8 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.4'
   gem "pry-stack_explorer"
  gem "pry-byebug"
+ gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1', require: false
+
 end
 
 group :development do

@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
   end
 
   it "returns a user's email and password as a string" do
-  	user = FactoryGirl.create(:user, email: "abdou@ex.com", password: "me")
+  	user = FactoryGirl.create(:user, email: "abdou@ex.com", password: "me", password_confirmation: "me")
   	user.info.should == "abdou@ex.com ----> me"
   end
   
@@ -43,7 +43,10 @@ RSpec.describe User, type: :model do
 		  	User.by_letter("a").should_not include nil
 		  	User.by_letter("h").should_not include @abdelkarim, @marouane 
 		  	User.by_letter("m").should_not include @abdelilah, @hassankhali
-	 	end
-	end
+	 	  end
+	  end
   end
+
+  it {should have_many(:phones)}
+  it {should have_many(:orders)}
 end
